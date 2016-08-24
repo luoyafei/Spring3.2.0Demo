@@ -5,9 +5,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.luo.action.UserAction;
+import com.luo.bean.User;
+import com.luo.service.UserService;
 
 @ContextConfiguration("classpath:beans.xml")
 public class testUserDao extends AbstractJUnit4SpringContextTests {
+
+	
 
 	private UserAction ua;
 	public UserAction getUa() {
@@ -18,6 +22,15 @@ public class testUserDao extends AbstractJUnit4SpringContextTests {
 		this.ua = ua;
 	}
 	
+	private UserService us;
+	public UserService getUs() {
+		return us;
+	}
+	@Resource(name="us")
+	public void setUs(UserService us) {
+		this.us = us;
+	}
+	
 	@Test
 	public void testSave() {
 		try {
@@ -25,5 +38,12 @@ public class testUserDao extends AbstractJUnit4SpringContextTests {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testC3p0() {
+		User user = new User();
+		user.setName("分发技术");
+		us.save(user);
 	}
 }
