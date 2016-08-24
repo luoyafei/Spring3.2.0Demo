@@ -12,14 +12,13 @@ import com.opensymphony.xwork2.ActionSupport;
 @Component(value="userAction")
 @Scope("prototype")
 public class UserAction extends ActionSupport {
-
-	
-	
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private UserService us;
+	
+	
 	private String username;
 	private String password;
 	private String repassword;
@@ -42,7 +41,7 @@ public class UserAction extends ActionSupport {
 		this.repassword = repassword;
 	}
 
-	private UserService us;
+	
 	public UserService getUs() {
 		return us;
 	}
@@ -53,17 +52,14 @@ public class UserAction extends ActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-		// TODO Auto-generated method stub
-System.out.println(username);
+		if(username == null || username.trim().hashCode() == 0)
+			username = "路上的否的";
 		if(username != null && username.trim().hashCode() != 0) {
 			User user = new User();
 			user.setName(username);
 			us.save(user);
-System.out.println(1);
 			return SUCCESS;
-
 		} else 
-System.out.println(2);
 			return INPUT;
 	}
 	

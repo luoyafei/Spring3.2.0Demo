@@ -1,27 +1,29 @@
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import javax.annotation.Resource;
+
+import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.luo.bean.User;
-import com.luo.service.UserService;
+import com.luo.action.UserAction;
 
 @ContextConfiguration("classpath:beans.xml")
 public class testUserDao extends AbstractJUnit4SpringContextTests {
 
-	/*@Resource(name="us")
-	private static UserService us;*/
+	private UserAction ua;
+	public UserAction getUa() {
+		return ua;
+	}
+	@Resource(name="userAction")
+	public void setUa(UserAction ua) {
+		this.ua = ua;
+	}
 	
-	public static void main(String[] args) {
-		@SuppressWarnings("resource")
-		UserService us = new ClassPathXmlApplicationContext("beans.xml").getBean("us", UserService.class); 
-		User user = new User();
-		user.setName("阿胶狂热时间考虑");
-		us.save(user);
-	}	
-/*	@Test
+	@Test
 	public void testSave() {
-		User user = new User();
-		user.setName("阿胶狂热时间考虑");
-		us.save(user);
-	}*/
+		try {
+			ua.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
