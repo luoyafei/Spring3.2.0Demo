@@ -43,7 +43,12 @@ public class testUserDao extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void testC3p0() {
 		User user = new User();
-		user.setName("分发技术");
+		user.setName("分发技术002");
 		us.save(user);
+	}
+	
+	@Test
+	public void testGet() {
+		us.getUser();
 	}
 }

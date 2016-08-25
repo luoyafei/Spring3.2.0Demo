@@ -3,7 +3,6 @@ package com.luo.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.luo.bean.User;
 import com.luo.dao.UserDao;
@@ -22,8 +21,10 @@ public class UserService {
 		this.ud = ud;
 	}
 	
-	@Transactional
 	public void save(User user) {
 		ud.save(user);
+	}
+	public void getUser() {
+		ud.getUserAll();
 	}
 }
